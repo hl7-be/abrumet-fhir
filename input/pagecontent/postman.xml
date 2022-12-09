@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../input-cache/schemas/R5/fhir-single.xsd">
+
+<h3>Import the project FHIR Abrumet</h3>
+
+<p>Once you downloaded the project on <a href="PostManCollection.zip">FHIR_Abrumet_postman_collection</a>, you will need to import the project in Postman.</p>
+
+<p>Click on import on the top left of the user interface, select upload files and set it to the downloaded JSON file.</p>
+
+<img src="import_confirm.jpg"
+     alt="import on Postman" />
+	 
+<p></p>	 
+<p>Finish the process and 2 new collection named "Authorization SMART-on-FHIR" and "FHIR bundle "should appear on the left panel containing 7 requests :</p>
+
+<img src="fhir_request.jpg"
+     alt="request on Postman"/>
+	 
+<h3>How to use the FHIR Abrumet collection</h3>
+
+<h4>Collection variables</h4>
+<p>In order to ease the testing, several parameters have been implemented as variables. Prior to doing any request you should set up your project personal parameters.
+Postman allows you to set variables for a specific collection. To access these variables, select the Authorization SMART-on-FHIR collection and click on Variables.</p>
+
+<img src="variables.jpg"
+     alt="variable for SMART on FHIR" />
+
+<p></p>
+<p>These variables need to be adapted as you go through your tests.
+<li>SMART-JWT : This variable is the authorization token and should be updated automatically by Postman.</li>
+<li>Patient NISS : This variable represent the patient NISS. If another patient should be used, you need to modify the NISS on this variables (note that a different JWT will need to be retrieved)</li>
+<li>Client_id and Client-Secret : These two variables are defining the Open-ID-Connect part of the authentication process. (see <a href = "procedure.html">Administrative Procedure</a>)</li>
+<li>Callback_url : This is the callback URL that you will be redirected to after your application is authorized.</li>
+<li>Scope : <font color="red">voir ce qu'on met</font></li>
+</p>
+
+<p>Updating those variables should be the main interaction that is needed to make the API work.</p>
+
+<h4>SMART on FHIR JWT</h4>
+
+<p>Authentication is the first step of all the possible transactions as the user will need to be authenticated in order to access Brusafe+ functionality. Fortunately, Postman has a built-in OAuth2 authentication engine which we can use once to access the different functionalities.</p>
+
+<p>In order to set it up, the request "Obtain medical FHIR JWT" shoud be edited.
+In the Authorization panel : <img src = "fhir_jwt.jpg" alt = "Authorization panel"></img>
+
+</p>
+<p></p>
+<p>All parameters should correspond to the parameter given to Abrumet and most of them are variables.</p>
+
+<p>Find underneath the default setup which can be use initially : 
+<li>Token Name : bearer</li>
+<li>Grant Type : Authorization Code</li>
+<li>Callback URL : see Variables</li>
+<li>Auth URL : https://auth.tst.brusafe.be/auth/realms/abrumet/protocol/openid-connect/auth</li>
+<li>Token URL : https://auth.tst.brusafe.be/auth/realms/abrumet/protocol/openid-connect/token</li>
+<li>Client ID : see Variables</li>
+<li>Client Secret  : see Variables</li>
+<li>Scope : </li>
+<li>State : leave it empty</li>
+<li>Client Authentication : Send as Basic Auth header</li>
+</p>
+
+<p>The OAuth2 setup should be saved by Postman and later, you won't need to fill this up again as Postman saves these information.
+Once all the parameters properly filled out, you can click on Request Token.
+A popup window should appear showing Brusafe+ portal. Follow the authentication process from the portal. Once authenticated and the popup closed, the token should have been retrieved automatically by Postman and as postman engine uses cookies, this popup window shouldn't appear anymore during a test sequence.</p>
+
+<p>The window can be closed by hitting "Use Token" on the top right and then "Update" on the bottom right. The authentication part has been done and there shouldn't be any need to redo it again during a short test sequence.</p>
+</div>

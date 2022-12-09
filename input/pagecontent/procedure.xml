@@ -1,0 +1,30 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../input-cache/schemas/R5/fhir-single.xsd">
+	<h3>Authentication tokens</h3>
+	<h4>How to get your access token.</h4>
+	<p>
+    This FHIR server is secured with OAuth2.0 based on SMART on FHIR.
+	To make requests on the server, the developer will need a token. This means that he must be able to retrieve an access token. In order to retrieve an access token, the developer must first be registered on the authorization server.
+	</p>
+	
+	<p>To register, a request must be made in advance to Mr. Axel Teichmann at the following address: it.team@abrumet.be</p>
+
+	<p>The following preconditions will be required for any registration with Abrumet:
+	<li>An application</li>
+	<li>A self-signed security certificate</li>
+	<li>Installation of Brusafe + public safety certificates</li>
+	<li>Ask a certificate to it.team@abrumet.be</li>
+	
+	</p>
+	<p>The following information should appear in the mail:
+	<li>The name of your application</li>
+	<li>The url of your application</li>
+	<li>The access request document complete</li>
+	<li>
+	The type of application :
+	<ul>
+	<li>Mobile Application</li>	
+	</ul>
+	</li>
+	</p>
+	<p>An email of approval will be sent to you a few days after your request.</p>
+</div>

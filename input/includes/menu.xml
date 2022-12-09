@@ -23,14 +23,40 @@
 		</a>
 		<ul class="dropdown-menu">
 			<li>
+				<a href="fhirbelgium.html">FHIR in Belgium</a>
+			</li>
+			<li>
+				<a href="rest.html">REST request</a>
+			</li>
+			<li>
+				<a href="postman.html">Postman step by step</a>
+			</li>
+			<li>
 				<a href="artifacts.html">Artifact Index</a>
 			</li>
 		</ul>
 	</li>
 	<li class="dropdown">
-		<a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementation<b class="caret"></b></a>
+		<a data-toggle="dropdown" href="#" class="dropdown-toggle">Autorization<b class="caret"></b>
+		</a>
 		<ul class="dropdown-menu">
-			<li><a href="downloads.html">Downloads</a></li>
+			<li>
+				<a href="procedure.html">Administrative Procedure</a>
+			</li>
+			<li>
+				<a href="abruAuth.html">Abrumet Auth</a>
+			</li>
+						
 		</ul>
 	</li>
+	
+			<li>
+				<a href="appconnected.html">Connected application</a>
+			</li>					
+
+	
+	
+	
+	<li><a href="downloads.html">Downloads</a></li>
+		
 </ul>      

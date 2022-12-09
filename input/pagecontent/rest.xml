@@ -1,0 +1,436 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../input-cache/schemas/R5/fhir-single.xsd">
+	<p>
+    In this implementation guide, we will cover 5 REST request.
+	</p>
+	<a name="Create"> </a>
+	<h3>Create BeAllergyIntolerance for a patient</h3>
+	<h4>Purpose</h4>
+	<p>This operation can be used to create an BeAllergyIntolerance resource for a patient (with a certain SSIN number) as a practitioner (with a certain SSIN number). </p>
+	<h4>Request</h4>
+	<p>
+	The request contains:
+	<li>A JWT token as authorization. It also contains some information about the actor, which can be used to validate or verify certain business rules;</li>
+		<li>An BeAllergyIntolerance resource body where the fields are structured according the implementation guide of eHealth. For the reference to the patient and the recorder we expect logical references in the body (the SSIN number should be used, as described below). </li>
+	</p>
+	<table border="1px" width="900">
+		<tbody>
+			<tr>
+				<td style="width: 120.135px;"> <strong>Method</strong>
+				</td>
+				<td style="width: 763.865px;" colspan="4"> POST</td>
+			</tr>
+			<tr>
+				<td style="width: 120.135px;"> <strong>Request URL</strong>
+				</td>
+				<td style="width: 763.865px;" colspan="4"> AllergyIntolerance</td>
+			</tr>
+			<tr>
+				<td style="width: 120.135px;">
+					<strong>  Header</strong>
+				</td>
+				<td style="width: 106.115px;"> Authorization</td>
+				<td style="width: 651.75px;" colspan="3">
+					<code>{% raw %}</code> Bearer {{token}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 120.135px;">
+					<strong>  Parameters</strong>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 120.135px;" rowspan="5">
+					<p>
+						<strong> Body</strong>
+					</p>
+				</td>
+				<td style="width: 763.865px;" colspan="4"> JSON/XML of BeAllergyIntolerance resource (defined in eHealth implementation guide) with :</td>
+			</tr>
+			<tr>
+				<td style="width: 106.115px;" rowspan="2"> patient</td>
+				<td style="width: 74.0833px;" rowspan="2"> identifier</td>
+				<td style="width: 58.0625px;">system</td>
+				<td style="width: 507.604px;"> https://www.ehealth.fgov.be/standards/fhir/NamingSystem/ssin</td>
+			</tr>
+			<tr>
+				<td style="width: 58.0625px;"> value</td>
+				<td style="width: 507.604px;">
+					<code>{% raw %}</code> {{ssin}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 106.115px;" rowspan="2"> recorder</td>
+				<td style="width: 74.0833px;" rowspan="2"> identifier</td>
+				<td style="width: 58.0625px;">system</td>
+				<td style="width: 507.604px;"> https://www.ehealth.fgov.be/standards/ fhir/NamingSystem/ssin</td>
+			</tr>
+			<tr>
+				<td style="width: 58.0625px;"> value</td>
+				<td style="width: 507.604px;">
+					<code>{% raw %}</code> {{ssin}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h4>Conditions</h4>
+	<p> For this request we expect the following conditions to guarantee a successful operation:
+	<li>The resource is structured according the Belgian FHIR profile and follows the defined terminology bindings;</li>
+		<li>The JWT token is valid;</li>
+		<li>The authorization is successful;</li>
+		<li>The SSIN numbers (patient, recorder) do exist in the national and bis register;</li>
+		<li>In the vault that is addressed, there is no BeAllergyIntolerance resource present with the same value in the field “code” for the same patient (identified with his SSIN number). This to avoid double registration of the same allergy or intolerance;</li>
+		<li>The recorder is the person requesting the operation (based on the JWT token).</li>
+	</p>
+	<h4>Response</h4>
+	<p>If the request is successful, the BeAllergyIntolerance resource is stored in the vault. The resource will be
+returned with some additional information being the ID, an automatic generated narrative (client
+defined narratives are ignored) and a meta part (containing the version number and the profile type).
+If the conditions for the operation are not met or something fails, the response will be an error.</p>
+	<a name="Read"> </a>
+	<h3>Read BeAllergyIntolerance by ID (and patient identifier)</h3>
+	<h4>Purpose</h4>
+	<p>This operation is provided to read a BeAllergyIntolerance by the resource ID and the patient identifier.
+		This of course is only possible if both are known by the server</p>
+	<h4>Request</h4>
+	<p>The request contains:
+<li>A JWT token as authorization</li>
+		<li>An ID in the body</li>
+		<li>The identifier of the patient linked to this BeAllergyIntolerance</li>
+	</p>
+	<table border="1px" width="900">
+		<tbody>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 120.114px;"> <strong>Method</strong>
+				</td>
+				<td style="height: 18px; width: 764.489px;" colspan="2"> POST</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 120.114px;">
+					<strong> Request URL</strong>
+				</td>
+				<td style="height: 18px; width: 764.489px;" colspan="2"> AllergyIntolerance/_search</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 36px; width: 120.114px;" rowspan="2">
+					<strong> Header</strong>
+				</td>
+				<td style="height: 18px; width: 131.108px;"> Authorization</td>
+				<td style="height: 18px; width: 627.585px;">
+					<code>{% raw %}</code> Bearer {{token}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 131.108px;"> Content-Type</td>
+				<td style="height: 18px; width: 627.585px;"> application/x-www-form-urlencoded</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 120.114px;">
+					<strong> Parameters</strong>
+				</td>
+				<td style="height: 18px; width: 764.489px;" colspan="2"/>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 36px; width: 120.114px;" rowspan="2">
+					<strong> Body</strong>
+				</td>
+				<td style="height: 18px; width: 131.108px;"> _id</td>
+				<td style="height: 18px; width: 627.585px;">
+					<code>{% raw %}</code> {{id}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 131.108px;"> patient.identifier</td>
+				<td style="height: 18px; width: 627.585px;">  <code>{% raw %}</code> https://www.ehealth.fgov.be/standards/fhir/NamingSystem/ssin|{{ssin}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h4>Conditions</h4>
+	<p>The expected conditions are:
+	<li>The JWT token is valid</li>
+		<li>The authorization is successful</li>
+		<li>The ID exists on the server</li>
+		<li>The patient identifier provided corresponds with the one linked in the BeAllergyIntolerance</li>
+	</p>
+	<h4>Response</h4>
+	<p>If a BeAllergyIntolerance resource with the provided ID exists and the patient identifier corresponds
+with the one linked in the BeAllergyIntolerance, the BeAllergyIntolerance is returned in the response
+(inside a FHIR Bundle resource).
+</p>
+	<p>If the conditions are true, but the BeAllergyIntolerance can’t be found, the response will be an empty
+FHIR Bundle. </p>
+	<p>If the conditions for the operation are not met or something fails, the response will be an error</p>
+	<a name="Update"> </a>
+	<h3>&#8239;Update BeAllergyIntolerance by ID</h3>
+	<h4>Purpose</h4>
+	<p>The update operation on a BeAllergyIntolerance allows an actor to edit some data if something changes
+with the BeAllergyIntolerance (of a patient). For this request the ID of the BeAllergyIntolerance is
+needed and a new body should be present. 
+</p>
+	<h4>Request</h4>
+	<p>The request contains: 
+	<li>A JWT token as authorization</li>
+	<li>The ID in the URL</li>
+	<li>An If-Match header with the version number that the updated resource is based on</li>
+	<li>An updated BeAllergyIntolerance resource body (including the corresponding ID)</li>
+	
+	</p>
+	<table border="1px" width="900">
+		<tbody>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 120.139px;">
+					<strong> Method</strong>
+				</td>
+				<td style="height: 18px; width: 765.903px;" colspan="4"> PUT</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 120.139px;">
+					<strong> Request URL</strong>
+				</td>
+				<td style="height: 18px; width: 765.903px;" colspan="4">
+					<code>{% raw %}</code> AllergyIntolerance/{{id}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 36px; width: 120.139px;" rowspan="2">
+					<strong> Header</strong>
+				</td>
+				<td style="height: 18px; width: 110.139px;"> Authorization</td>
+				<td style="height: 18px; width: 650.451px;" colspan="3">  <code>{% raw %}</code> Bearer {{token}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 110.139px;"> If-Match</td>
+				<td style="height: 18px; width: 650.451px;" colspan="3">
+					<code>{% raw %}</code> W/"{{version}}" <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 120.139px;">
+					<strong> Parameters</strong>
+				</td>
+				<td style="height: 18px; width: 765.903px;" colspan="4"/>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 108px; width: 120.139px;" rowspan="6">
+					<strong> Body</strong>
+				</td>
+				<td style="height: 18px; width: 765.903px;" colspan="4"> JSON/XML of BeAllergyIntolerance resource (defined in eHealth implementation guide) with :</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 110.139px;"> id</td>
+				<td style="height: 18px; width: 650.451px;" colspan="3">
+					<code>{% raw %}</code> {{id}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 36px; width: 110.139px;" rowspan="2"> patient</td>
+				<td style="height: 36px; width: 80.1042px;" rowspan="2"> identifier</td>
+				<td style="height: 18px; width: 77.0833px;">system</td>
+				<td style="height: 18px; width: 482.639px;"> https://www.ehealth.fgov.be/standards/fhir/NamingSystem/ssin</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 77.0833px;"> value</td>
+				<td style="height: 18px; width: 482.639px;">
+					<code>{% raw %}</code> {{ssin}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 36px; width: 110.139px;" rowspan="2"> recorder</td>
+				<td style="height: 36px; width: 80.1042px;" rowspan="2"> identifier</td>
+				<td style="height: 18px; width: 77.0833px;"> system</td>
+				<td style="height: 18px; width: 482.639px;"> https://www.ehealth.fgov.be/standards/fhir/NamingSystem/ssin</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 77.0833px;"> value</td>
+				<td style="height: 18px; width: 482.639px;">
+					<code>{% raw %}</code> {{ssin}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h4>Conditions</h4>
+	<p>
+	For this request we expect the following conditions to guarantee a successful operation:
+	<li>The ID of the resource exists on the server</li>
+	<li>The resource is structured according the Belgian FHIR profile and follows the defined terminology bindings</li>
+	<li>The JWT token is valid</li>
+	<li>The authorization is successful</li>
+	<li>The If-Match number matches with the latest version number on the server</li>
+	<li>The patient’s SSIN number must stay the same as the original version</li>
+	<li>In case of new recorder: the SSIN number exists in the national and bis register</li>
+	<li>The recorder is the person requesting the operation (based on the JWT token)</li>
+	</p>
+	<h4>Response</h4>
+	<p>If the request is successful, the BeAllergyIntolerance resource is updated in the vault. The resource will
+be returned with some additional information being the ID, an automatic generated narrative (client
+defined narratives are ignored) and a meta part (containing the version number and the profile type). </p>
+<p>If the conditions for the operation are not met or something fails, the response will be an error.</p>
+
+	<a name="Delete"> </a>
+	<h3>Delete BeAllergyIntolerance by ID (and patient identifier)</h3>
+	<h4>Purpose</h4>
+	<p>An BeAllergyIntolerance resource can be deleted in the vault using this operation. The ID needs to be
+specified in the URL accompanied with the patient identifier. The JWT token will determine if the
+resource can be deleted by the actor. 
+</p>
+	<h4>Request</h4>
+	<p>The request contains: 
+	<li>A JWT token as authorization</li>
+	<li>The ID in the URL</li>
+	<li>The identifier of the patient linked to this BeAllergyIntolerance</li>
+	</p>
+	<table style="height: 130px;" border="1px" width="900">
+		<tbody>
+			<tr style="height: 18px;">
+				<td style="width: 120.087px; height: 18px;">
+					<strong> Method</strong>
+				</td>
+				<td style="width: 765.955px; height: 18px;" colspan="2"> DEL</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="width: 120.087px; height: 18px;">
+					<strong> Request URL</strong>
+				</td>
+				<td style="width: 765.955px; height: 18px;" colspan="2"> AllergyIntolerance</td>
+			</tr>
+			<tr style="height: 19px;">
+				<td style="width: 120.087px; height: 19px;">
+					<strong> Header</strong>
+				</td>
+				<td style="width: 123.09px; height: 19px;"> Authorization</td>
+				<td style="width: 637.552px; height: 19px;">
+					<code>{% raw %}</code> Bearer {{token}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 19px;">
+				<td style="width: 120.087px; height: 38px;" rowspan="2">
+					<strong> Parameters</strong>
+				</td>
+				<td style="width: 123.09px; height: 19px;"> _id</td>
+				<td style="width: 637.552px; height: 19px;">
+					<code>{% raw %}</code> {{id}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 19px;">
+				<td style="width: 123.09px; height: 19px;"> patient.identifier</td>
+				<td style="width: 637.552px; height: 19px;">
+					<code>{% raw %}</code> https://www.ehealth.fgov.be/standards/fhir/NamingSystem/ssin|{{ssin}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="width: 120.087px; height: 18px;">
+					<strong> Body</strong>
+				</td>
+				<td style="width: 765.955px; height: 18px;" colspan="2"/>
+			</tr>
+		</tbody>
+	</table>
+	<h4>Conditions</h4>
+	<p>For this request we expect the following conditions to guarantee a successful operation:
+	<li>The JWT token is valid</li>
+	<li>The authorization is successful</li>
+	<li>The ID of the resource exists on the server</li>
+	<li>The patient identifier provided corresponds with the one linked in the BeAllergyIntolerance</li>
+	</p>
+	<h4>Response</h4>
+	<p>If the request is successful, the BeAllergyIntolerance resource is deleted in the vault. The response will
+contain an OperationOutcome resource with a message that the deletion succeeded. 
+</p>
+	<p>If the conditions for the operation are not met or something fails, the response will be an error.</p>
+	<a name="Search"> </a>
+	<h3>Search BeAllergyIntolerances for a patient’s SSIN</h3>
+	<h4>Purpose</h4>
+	<p>With a search operation it is possible to find some resources based on the included parameters. This
+specific search operation allows the actor to find all active BeAllergyIntolerance resources, in the vault
+addressed, belonging to one specific patient based on his or her SSIN number. </p>
+	<h4>Request</h4>
+	<p>
+	The request contains: 
+	<li>A JWT token as authorization; 
+</li>
+	<li>A reference to a patient using the SSIN identifier. 
+</li>
+	</p>
+	<table border="1px" width="900">
+		<tbody>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 118.177px;">
+					<strong> Method</strong>
+				</td>
+				<td style="height: 18px; width: 634.323px;" colspan="2"> POST</td>
+				<td style="height: 18px; width: 128.229px;"/>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 118.177px;">
+					<strong> Request URL</strong>
+				</td>
+				<td style="height: 18px; width: 634.323px;" colspan="2"> AllergyIntolerance/_search</td>
+				<td style="height: 18px; width: 128.229px;">
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 36px; width: 118.177px;" rowspan="2">
+					<strong> Header</strong>
+				</td>
+				<td style="height: 18px; width: 131.198px;"> Authorization</td>
+				<td style="height: 18px; width: 497.812px;">
+					<code>{% raw %}</code> Bearer {{token}} <code>{% endraw %}</code>
+				</td>
+				<td style="height: 18px; width: 128.229px;"/>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 131.198px;"> Content-Type</td>
+				<td style="height: 18px; width: 497.812px;"> application/x-www-form-urlencoded</td>
+				<td style="height: 18px; width: 128.229px;">
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 118.177px;">
+					<strong> Parameters</strong>
+				</td>
+				<td style="height: 18px; width: 634.323px;" colspan="2"/>
+				<td style="height: 18px; width: 128.229px;">
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 54px; width: 118.177px;" rowspan="3">
+					<strong> Body</strong>
+				</td>
+				<td style="width: 131.198px;"> patient.identifier</td>
+				<td style="width: 631.354px;">
+					<code>{% raw %}</code> https://www.ehealth.fgov.be/standards/fhir/NamingSystem/ssin|{{ssin}} <code>{% endraw %}</code>
+				</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 131.198px;"> _include</td>
+				<td style="height: 18px; width: 497.812px;"> AllergyIntolerance.recorder</td>
+				<td style="height: 18px; width: 128.229px;"> optional</td>
+			</tr>
+			<tr style="height: 18px;">
+				<td style="height: 18px; width: 131.198px;"> _include:iterate</td>
+				<td style="height: 18px; width: 497.812px;"> PractitionerRole:practitioner</td>
+				<td style="height: 18px; width: 128.229px;"> optional</td>
+			</tr>
+		</tbody>
+	</table>
+	<h4>Conditions</h4>
+	<p>
+	The expected conditions are: 
+	<li>The JWT token is valid</li>
+	<li>The SSIN number is valid</li>
+	<li>The authorization is successful</li>
+	</p>
+	<h4>Response</h4>
+	<p>If BeAllergyIntolerance resources exists (and are not labeled as deleted) for the patient with the
+provided SSIN number, they are returned in a FHIR bundle. If the patient doesn’t exist in the vault or no
+allergies are present, the bundle is empty</p>
+	<p>If the _include=AllergyIntolerance.recorder search parameter is present, the bundle will also contain the
+PractitionerRole resources that are referred to in the AllergyIntolerance.recorder field which represents
+the author of the allergy or intolerance.</p>
+	<p>If the _include:iterate=PractitionerRole:practitioner search
+parameter is present in the body, the bundle will also contain the Practitioner resources that are linked
+to the PractitionerRole resources. 
+</p>
+	<p>If the conditions for the operation are not met or something fails, the response will be an error.</p>
+</div>

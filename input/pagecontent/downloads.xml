@@ -43,6 +43,16 @@
 				</td>
 {% endunless %}
 			</tr>
+			<tr>
+			<th>PostMan Collection</th>
+			<td>
+					<a href="PostManCollection.zip">
+					Exemple Rest Request</a>
+					
+				
+				</td>
+			</tr>
 		</tbody>
+		
 	</table>
 </div>
