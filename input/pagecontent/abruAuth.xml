@@ -1,14 +1,64 @@
 <div xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../../input-cache/schemas/R5/fhir-single.xsd">
 	<h3>Preconditions</h3>
 	<p>In order to develop an fhir application using the webservices of Abrumet, it is necessary to have the following material and information : 
+<<<<<<< Updated upstream
 	<li>An eID card reader and the installed software Dioss middleware </li>
 	<li>A user within the Brusafe + platform</li>
+=======
+	<ul>
+	<li>An eID card reader and the installed software Dioss middleware </li>
+	<li>A user within the Brusafe + platform</li>
+	</ul>
+>>>>>>> Stashed changes
 	This user is important in the context of the various patient tests, without this no data can be associated during a call to a web services
 	</p>
 	<h3>How to register on the Brusafe+ Platform</h3>
 	<p>
+<<<<<<< Updated upstream
 	<li>Open your browser and please go to : <a href = "https://auth.tst.brusafe.be/portal/patient/index.xhtml">https://auth.tst.brusafe.be/portal/patient/index.xhtml</a></li>
 	<li>Click on "Belgian eID". This user registration can only be done if you have a card reader and the Dioss Middleware software installed on your machine, an error message will warn you if this is not the case.</li>
 	</p>
 
+=======
+	<ul>
+	<li>Open your browser and please go to : <a href = "https://auth.tst.brusafe.be/portal/patient/index.xhtml">https://auth.tst.brusafe.be/portal/patient/index.xhtml</a></li>
+	<li>Click on "Belgian eID". This user registration can only be done if you have a card reader and the Dioss Middleware software installed on your machine, an error message will warn you if this is not the case.</li>
+	<li>Enter the PIN code of your ID carte and click afterwards on "Ok"	
+	<p></p>
+	<img src="pin.jpg"
+     alt="PIN of eid card" />
+	</li>
+	<li>The user creation form is displayed
+	<p></p>
+	<img src="formulaire.jpg"
+     alt="formulaire" />
+	</li></ul>
+	<p>Medical Provider Type: You have the opportunity to be either a patient or a practitioner. If you are a practitioner please select your specialty from the drop-down list.</p>
+	<ul>
+	<li>Click on Register</li>
+	<li>The terms and conditions related to the application are displayed.</li>
+	<li>Click on « Accept» if you accept the terms and conditions related to the application.</li>
+	<li>Enter the verification code for your previously received account on your mobile phone. Then click on « Validate phonenumber».
+	<p></p>
+	<img src="sms.jpg"
+     alt="sms code" />
+	</li>
+	<li>A confirmation email is sent to validate the creation of your account
+	<p></p>
+	<img src="verification.jpg"
+     alt="verification" />
+	</li>
+	<li>Click on its link to validate the creation of your user
+	<p></p>
+	<img src="mailVerif.jpg"
+     alt="mailVerif" />
+	</li>
+	At this point, if you are not a physician, you are connected to the platform.
+	<li>For the doctor, your account is deactivated until your identity is approved
+	<p></p>
+	<img src="desactive.jpg"
+     alt="mail desactive" />
+	</li></ul>
+	</p>
+>>>>>>> Stashed changes
 </div>

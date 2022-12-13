@@ -9,8 +9,15 @@
 	<h4>Request</h4>
 	<p>
 	The request contains:
+<<<<<<< Updated upstream
 	<li>A JWT token as authorization. It also contains some information about the actor, which can be used to validate or verify certain business rules;</li>
 		<li>An BeAllergyIntolerance resource body where the fields are structured according the implementation guide of eHealth. For the reference to the patient and the recorder we expect logical references in the body (the SSIN number should be used, as described below). </li>
+=======
+	<ul>
+	<li>A JWT token as authorization. It also contains some information about the actor, which can be used to validate or verify certain business rules;</li>
+	<li>An BeAllergyIntolerance resource body where the fields are structured according the implementation guide of eHealth. For the reference to the patient and the recorder we expect logical references in the body (the SSIN number should be used, as described below). </li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<table border="1px" width="900">
 		<tbody>
@@ -74,12 +81,23 @@
 	</table>
 	<h4>Conditions</h4>
 	<p> For this request we expect the following conditions to guarantee a successful operation:
+<<<<<<< Updated upstream
 	<li>The resource is structured according the Belgian FHIR profile and follows the defined terminology bindings;</li>
 		<li>The JWT token is valid;</li>
 		<li>The authorization is successful;</li>
 		<li>The SSIN numbers (patient, recorder) do exist in the national and bis register;</li>
 		<li>In the vault that is addressed, there is no BeAllergyIntolerance resource present with the same value in the field “code” for the same patient (identified with his SSIN number). This to avoid double registration of the same allergy or intolerance;</li>
 		<li>The recorder is the person requesting the operation (based on the JWT token).</li>
+=======
+	<ul>
+	<li>The resource is structured according the Belgian FHIR profile and follows the defined terminology bindings;</li>
+	<li>The JWT token is valid;</li>
+	<li>The authorization is successful;</li>
+	<li>The SSIN numbers (patient, recorder) do exist in the national and bis register;</li>
+	<li>In the vault that is addressed, there is no BeAllergyIntolerance resource present with the same value in the field “code” for the same patient (identified with his SSIN number). This to avoid double registration of the same allergy or intolerance;</li>
+	<li>The recorder is the person requesting the operation (based on the JWT token).</li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<h4>Response</h4>
 	<p>If the request is successful, the BeAllergyIntolerance resource is stored in the vault. The resource will be
@@ -93,9 +111,17 @@ If the conditions for the operation are not met or something fails, the response
 		This of course is only possible if both are known by the server</p>
 	<h4>Request</h4>
 	<p>The request contains:
+<<<<<<< Updated upstream
 <li>A JWT token as authorization</li>
 		<li>An ID in the body</li>
 		<li>The identifier of the patient linked to this BeAllergyIntolerance</li>
+=======
+	<ul>
+	<li>A JWT token as authorization</li>
+	<li>An ID in the body</li>
+	<li>The identifier of the patient linked to this BeAllergyIntolerance</li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<table border="1px" width="900">
 		<tbody>
@@ -147,10 +173,19 @@ If the conditions for the operation are not met or something fails, the response
 	</table>
 	<h4>Conditions</h4>
 	<p>The expected conditions are:
+<<<<<<< Updated upstream
 	<li>The JWT token is valid</li>
 		<li>The authorization is successful</li>
 		<li>The ID exists on the server</li>
 		<li>The patient identifier provided corresponds with the one linked in the BeAllergyIntolerance</li>
+=======
+	<ul>
+	<li>The JWT token is valid</li>
+	<li>The authorization is successful</li>
+	<li>The ID exists on the server</li>
+	<li>The patient identifier provided corresponds with the one linked in the BeAllergyIntolerance</li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<h4>Response</h4>
 	<p>If a BeAllergyIntolerance resource with the provided ID exists and the patient identifier corresponds
@@ -169,11 +204,20 @@ needed and a new body should be present.
 </p>
 	<h4>Request</h4>
 	<p>The request contains: 
+<<<<<<< Updated upstream
+=======
+	
+	<ul>
+>>>>>>> Stashed changes
 	<li>A JWT token as authorization</li>
 	<li>The ID in the URL</li>
 	<li>An If-Match header with the version number that the updated resource is based on</li>
 	<li>An updated BeAllergyIntolerance resource body (including the corresponding ID)</li>
+<<<<<<< Updated upstream
 	
+=======
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<table border="1px" width="900">
 		<tbody>
@@ -252,6 +296,10 @@ needed and a new body should be present.
 	<h4>Conditions</h4>
 	<p>
 	For this request we expect the following conditions to guarantee a successful operation:
+<<<<<<< Updated upstream
+=======
+	<ul>
+>>>>>>> Stashed changes
 	<li>The ID of the resource exists on the server</li>
 	<li>The resource is structured according the Belgian FHIR profile and follows the defined terminology bindings</li>
 	<li>The JWT token is valid</li>
@@ -260,6 +308,10 @@ needed and a new body should be present.
 	<li>The patient’s SSIN number must stay the same as the original version</li>
 	<li>In case of new recorder: the SSIN number exists in the national and bis register</li>
 	<li>The recorder is the person requesting the operation (based on the JWT token)</li>
+<<<<<<< Updated upstream
+=======
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<h4>Response</h4>
 	<p>If the request is successful, the BeAllergyIntolerance resource is updated in the vault. The resource will
@@ -276,9 +328,17 @@ resource can be deleted by the actor.
 </p>
 	<h4>Request</h4>
 	<p>The request contains: 
+<<<<<<< Updated upstream
 	<li>A JWT token as authorization</li>
 	<li>The ID in the URL</li>
 	<li>The identifier of the patient linked to this BeAllergyIntolerance</li>
+=======
+	<ul>
+	<li>A JWT token as authorization</li>
+	<li>The ID in the URL</li>
+	<li>The identifier of the patient linked to this BeAllergyIntolerance</li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<table style="height: 130px;" border="1px" width="900">
 		<tbody>
@@ -328,10 +388,18 @@ resource can be deleted by the actor.
 	</table>
 	<h4>Conditions</h4>
 	<p>For this request we expect the following conditions to guarantee a successful operation:
+<<<<<<< Updated upstream
 	<li>The JWT token is valid</li>
 	<li>The authorization is successful</li>
 	<li>The ID of the resource exists on the server</li>
 	<li>The patient identifier provided corresponds with the one linked in the BeAllergyIntolerance</li>
+=======
+	<ul><li>The JWT token is valid</li>
+	<li>The authorization is successful</li>
+	<li>The ID of the resource exists on the server</li>
+	<li>The patient identifier provided corresponds with the one linked in the BeAllergyIntolerance</li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<h4>Response</h4>
 	<p>If the request is successful, the BeAllergyIntolerance resource is deleted in the vault. The response will
@@ -347,10 +415,17 @@ addressed, belonging to one specific patient based on his or her SSIN number. </
 	<h4>Request</h4>
 	<p>
 	The request contains: 
+<<<<<<< Updated upstream
 	<li>A JWT token as authorization; 
 </li>
 	<li>A reference to a patient using the SSIN identifier. 
 </li>
+=======
+	<ul>
+	<li>A JWT token as authorization</li>
+	<li>A reference to a patient using the SSIN identifier</li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<table border="1px" width="900">
 		<tbody>
@@ -417,9 +492,17 @@ addressed, belonging to one specific patient based on his or her SSIN number. </
 	<h4>Conditions</h4>
 	<p>
 	The expected conditions are: 
+<<<<<<< Updated upstream
 	<li>The JWT token is valid</li>
 	<li>The SSIN number is valid</li>
 	<li>The authorization is successful</li>
+=======
+	<ul>
+	<li>The JWT token is valid</li>
+	<li>The SSIN number is valid</li>
+	<li>The authorization is successful</li>
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<h4>Response</h4>
 	<p>If BeAllergyIntolerance resources exists (and are not labeled as deleted) for the patient with the

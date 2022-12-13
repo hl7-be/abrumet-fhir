@@ -9,13 +9,24 @@
 	<p>To register, a request must be made in advance to Mr. Axel Teichmann at the following address: it.team@abrumet.be</p>
 
 	<p>The following preconditions will be required for any registration with Abrumet:
+<<<<<<< Updated upstream
+=======
+	<ul>
+>>>>>>> Stashed changes
 	<li>An application</li>
 	<li>A self-signed security certificate</li>
 	<li>Installation of Brusafe + public safety certificates</li>
 	<li>Ask a certificate to it.team@abrumet.be</li>
+<<<<<<< Updated upstream
 	
 	</p>
 	<p>The following information should appear in the mail:
+=======
+	</ul>
+	</p>
+	<p>The following information should appear in the mail:
+	<ul>
+>>>>>>> Stashed changes
 	<li>The name of your application</li>
 	<li>The url of your application</li>
 	<li>The access request document complete</li>
@@ -25,6 +36,10 @@
 	<li>Mobile Application</li>	
 	</ul>
 	</li>
+<<<<<<< Updated upstream
+=======
+	</ul>
+>>>>>>> Stashed changes
 	</p>
 	<p>An email of approval will be sent to you a few days after your request.</p>
 </div>
